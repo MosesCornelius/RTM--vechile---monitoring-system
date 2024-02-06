@@ -1,29 +1,115 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
+        header {
+            background-color: #0c0c0c;
+            color: #ffffff;
+            padding: 20px;
+            position: relative;
+        }
 
-.container {
-    width: 80%;
-    margin: 20px auto;
-}
+        .title {
+            margin: 0;
+        }
 
-section {
-    margin-bottom: 40px;
-}
+        .notification-profile {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
 
-h2 {
-    color: #333;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 5px;
-}
+        .notification,
+        .profile {
+            margin-left: 10px;
+        }
 
+        .dashboard-container {
+            display: flex;
+            margin-top: 20px;
+        }
 
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="title">RTMS</h1>
+            <div class="notification-profile">
+                <div class="notification">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-count">3</span>
+                </div>
+                <div class="profile">
+                    <span class="profile-icon">Profile</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="#driver-details">Driver Details</a></li>
+                <li><a href="#live-geolocation">Live Geolocation</a></li>
+                <li><a href="#maintenance-alert">Maintenance Alert</a></li>
+                <li><a href="#oil-level">Oil Level</a></li>
+                <li><a href="#tpms">TPMS</a></li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <section id="maintenance-alert" class="content-section">
+                <h2>Maintenance Alert</h2>
+                <p>This is a sample maintenance alert. It could contain information about upcoming maintenance schedules, alerts for potential issues, or reminders for regular inspections.</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

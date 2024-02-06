@@ -3,34 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truck Monitoring System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>RTMS </title>
+  
+    <!-- Include Google Maps API with your API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEGJ7YEdFyvwTgIfvLwVmaJXBSUbsomS8&callback=initMap" defer></script>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0c0c0c;
+            color: #ffffff;
+            padding: 20px;
+            position: relative;
+        }
+
+        .title {
+            margin: 0;
+        }
+
+        .notification-profile {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .notification,
+        .profile {
+            margin-left: 10px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style the map container */
+        #map {
+            display: none; /* Initially hide the map */
+            height: 400px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Truck Monitoring System</h1>
+        <div class="header-content">
+            <h1 class="title">RTMS</h1>
+            <div class="notification-profile">
+                <div class="notification">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-count">3</span>
+                </div>
+                <div class="profile">
+                    <span class="profile-icon">Profile</span>
+                </div>
+            </div>
+        </div>
     </header>
-    <div class="container">
-        <section id="tire-pressure">
-            <h2 >TPMS</h2>
-            <!-- Add tire pressure monitoring details here -->
-        </section>
-        <section id="oil-level">
-            <h2>Oil Level Tracking</h2>
-            <!-- Add oil level tracking details here -->
-        </section>
-        <section id="driver-details">
-            <h2>Driver Details</h2>
-            <!-- Add driver details here -->
-        </section>
-        <section id="live-geolocation">
-            <h2>Live Geolocation Identifier</h2>
-            <!-- Add live geolocation details here -->
-        </section>
-        <section id="maintenance-alert">
-            <h2>Maintenance Alert System</h2>
-            <!-- Add maintenance alert details here -->
-        </section>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="#" id="driver-details-link">Driver Details</a></li>
+                <li><a href="#" id="live-geolocation-link">Live Geolocation</a></li>
+                <li><a href="#" id="maintenance-alert-link">Maintenance Alert</a></li>
+                <li><a href="#" id="oil-level-link">Oil Level</a></li>
+                <li><a href="#" id="tpms-link">TPMS</a></li>
+            </ul>
+        </aside>
+        <main class="main-content" id="main-content">
+            <section id="maintenance-alert-section" class="content-section" style="display: none;">
+                <h2>Maintenance Alert</h2>
+                <div id="maintenance-alert-details">
+                    <!-- Alert details will be dynamically inserted here -->
+                </div>
+            </section>
+            <!-- Map container -->
+            <div id="map"></div>
+        </main>
     </div>
+
+    <script>
+        // Function to initialize the map
+        function initMap() {
+            // Set the coordinates for the center of the map (default to New York)
+            var center = { lat: 12.969059, lng: 80.189276 };
+
+            // Create a new map instance
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: center,
+                zoom: 12 // Adjust the zoom level as needed
+            });
+
+            // Add a marker to the map (default to New York)
+            var marker = new google.maps.Marker({
+                position: center,
+                map: map,
+                title: "i'm here" // Optional title for the marker
+            });
+
+            // Function to handle displaying map when "Live Geolocation" link is clicked
+            document.getElementById('live-geolocation-link').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                document.getElementById('map').style.display = 'block'; // Display the map
+            });
+        }
+    </script>
 </body>
 </html>
