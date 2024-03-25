@@ -3,155 +3,665 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RTMS </title>
-  
+  <title>RTMS - Login</title>
+
     <!-- Include Google Maps API with your API key -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEGJ7YEdFyvwTgIfvLwVmaJXBSUbsomS8&callback=initMap" defer></script>
-    <style>
-        /* Your existing CSS styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #000;
+          color: #ffffff; /* Set text color to black */
+          height: 100vh;
+      }
+    header {
+        background-color: #000;
+        color:#ffffff;
+        padding: 10px;
+        text-align:right-top;
+    }
 
-        header {
-            background-color: #0c0c0c;
-            color: #ffffff;
-            padding: 20px;
-            position: relative;
-        }
+    .header-icons {
+        text-align: right;
+        display: flex;
+        align-items: center;
+      
+        
+    }
+    .top-left-icons {
+        float: left;
+        padding: 10px;
+    }
 
-        .title {
-            margin: 0;
-        }
+    .top-right-icons {
+        float: right;
+        padding: 10px;
+    }
 
-        .notification-profile {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
+    .profile-icon,
+    .notification-icon,
+    .support-icon {
+        width: 24px; /* Adjust icon size as needed */
+        height: 24px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
 
-        .notification,
-        .profile {
-            margin-left: 10px;
-        }
+    .login-form {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        height: 100vh;
+    }
 
-        .dashboard-container {
-            display: flex;
-            margin-top: 20px;
-        }
+    .login-form h2 {
+        margin-top: 0;
+    }
 
-        .sidebar {
-            width: 200px;
-            background-color: #f4f4f4;
-        }
+    .login-form div {
+        margin-bottom: 10px;
+    }
 
-        .main-content {
-            flex: 1;
-            padding: 20px;
-        }
+    .login-form label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-        section {
-            margin-bottom: 40px;
-        }
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
 
-        h2 {
-            color: #333;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-        }
+    .login-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .login-form button:hover {
+        background-color: #0056b3;
+    }
 
-        li {
-            margin-bottom: 10px;
-        }
+    #login-error {
+        margin-top: 10px;
+    }
 
-        a {
-            text-decoration: none;
-            color: #333;
-            cursor: pointer;
-        }
+    
 
-        a:hover {
-            text-decoration: underline;
-        }
+    .top-left-icons {
+        float: left;
+        padding: 10px;
+    }
 
-        /* Style the map container */
-        #map {
-            display: none; /* Initially hide the map */
-            height: 400px;
-            width: 100%;
-        }
-    </style>
+    .top-right-icons {
+        float: right;
+        padding: 10px;
+    }
+
+    .profile-icon,
+    .notification-icon,
+    .support-icon {
+        width: 24px; /* Adjust icon size as needed */
+        height: 24px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+
+    .dashboard-container {
+        display: none; /* Change display property to none initially */
+        margin-top: 20px;
+        justify-content: flex-start; /* Change justify-content property to flex-start */
+        align-items: flex-start;
+        color: #000; /* Set text color to black */
+      
+     
+    }
+
+
+      .slide {
+          display: none;
+          margin: 0 auto; /* Add this line to center the slide horizontally */
+          max-width: 800px; /* Adjust the maximum width of the slide as needed */
+      }
+    .main-content {
+        flex: 1;
+        padding: 0 20px; /* Adjust padding to provide spacing on the sides */
+        display: flex;
+        flex-wrap: wrap;3
+        justify-content: space-between;
+        color: #ffff;; /* Set text color to black */
+        margin-left: 20px; /* Adjust margin to the left side */
+        margin-top: 0; /* Remove margin from the top side */
+    }
+
+
+      section {
+          width: calc(100% - 40px); /* Set the width to take up the entire width of the container minus the padding */
+          margin: 0 20px 40px; /* Adjust margin to provide spacing between sections */
+          background-color: #000;
+          padding: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+      }
+
+      h2 {
+          color: #000; /* Set text color to black */
+          border-bottom: 2px solid #000; /* Set border color to black */
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+          white-space: nowrap; /* Prevent line break */
+          overflow: hidden; /* Hide overflowing text */
+          text-overflow: ellipsis; /* Display ellipsis (...) for overflowing text */
+      }
+
+      .dashboard-heading {
+          margin-bottom: 0.5em; /* Add some margin below the dashboard heading */
+      }
+
+      ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+
+      li {
+          margin-bottom: 10px;
+      }
+
+      b.button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Styling for different button colors */
+    .button-primary {
+        background-color: #007bff; /* Blue color */
+        color: #fff;
+    }
+
+    .button-primary:hover {
+        background-color: #0056b3; /* Darker blue color on hover */
+    }
+
+    .button-secondary {
+        background-color: #6c757d; /* Gray color */
+        color: #fff;
+    }
+
+    .button-secondary:hover {
+        background-color: #5a6268; /* Darker gray color on hover */
+    }
+
+    .button-tertiary {
+        background-color: #28a745; /* Green color */
+        color: #fff;
+    }
+
+    .button-tertiary:hover {
+        background-color: #218838; /* Darker green color on hover */
+    }
+
+
+      #map {
+          position: fit;
+          height: 400px;
+          width: 100%;
+          border-radius: 5px;
+      }
+
+      .slide {
+          display: none;
+      }
+
+      .active {
+          display: block;
+      }
+
+      .details {
+          margin-bottom: 10px;
+      }
+
+      .details p {
+          margin: 5px 0;
+      }
+
+      .details p:first-child {
+          font-weight: bold;
+      }
+
+      /* Styling for the maintenance chart */
+      #maintenance-chart {
+          width: 100%;
+          height: auto;
+          max-width: 300px; /* Set the maximum width of the chart */
+      }
+
+      .maintenance-history {
+          position: relative;
+      }
+
+      .maintenance-history .chart-container {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          max-width: 300px; /* Set the maximum width of the chart container */
+      }
+
+      /* Styling for the oil droplet */
+      .oil-droplet {
+          width: 100px;
+          height: auto;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+      }
+
+      /* Styling for the tire pressure */
+    .tire-pressure {
+        font-size: 10px;
+    }
+
+    .tire {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Adjust the position of the tire pressure text for each tire */
+    #fl-pressure {
+        transform: translate(-25px, 0);
+    }
+
+    #fr-pressure {
+        transform: translate(25px, 0);
+    }
+
+    #rl-pressure {
+        transform: translate(-25px, 0);
+    }
+
+    #rr-pressure {
+        transform: translate(25px, 0);
+    }
+
+
+      /* Set slide headings to white */
+      .slide h2 {
+          color: #fff; /* Set text color to white */
+      }
+
+  </style>
+
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1 class="title">RTMS</h1>
-            <div class="notification-profile">
-                <div class="notification">
-                    <span class="notification-icon">🔔</span>
-                    <span class="notification-count">3</span>
-                </div>
-                <div class="profile">
-                    <span class="profile-icon">Profile</span>
-                </div>
+  <header>
+    <div class="login-form">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="password" required>
             </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p id="login-error" style="color: red; display: none;">Invalid username or password.</p>
+    </div>
+    <header>
+        <div class="top-left-icons">
+            <h1>RTMS</h1>
+        </div>
+        <div class="top-right-icons">
+            <img src="profile_icon.png" alt="Profile" class="profile-icon">
+            <img src="notification_icon.png" alt="Notification" class="notification-icon">
+            <img src="support_icon.png" alt="Support" class="support-icon">
         </div>
     </header>
-    <div class="dashboard-container">
+
+
+    <!-- Dashboard content (initially hidden) -->
+    <div class="dashboard-container" style="display: none;">
+        <!-- Dashboard content -->
+    </div>
+
+  <div class="dashboard-container">
         <aside class="sidebar">
             <h2>Dashboard</h2>
             <ul>
-                <li><a href="#" id="driver-details-link">Driver Details</a></li>
-                <li><a href="#" id="live-geolocation-link">Live Geolocation</a></li>
-                <li><a href="#" id="maintenance-alert-link">Maintenance Alert</a></li>
-                <li><a href="#" id="oil-level-link">Oil Level</a></li>
-                <li><a href="#" id="tpms-link">TPMS</a></li>
+                <li><button id="driver-details-link">Driver Details</button></li>
+                <li><button id="live-geolocation-link">Live Geolocation</button></li>
+                <li><button id="maintenance-alert-link">Maintenance Alert</button></li>
+                <li><button id="oil-level-link">Oil Level</button></li>
+                <li><button id="tpms-link">TPMS</button></li>
             </ul>
         </aside>
         <main class="main-content" id="main-content">
-            <section id="maintenance-alert-section" class="content-section" style="display: none;">
-                <h2>Maintenance Alert</h2>
-                <div id="maintenance-alert-details">
-                    <!-- Alert details will be dynamically inserted here -->
+            <section id="driver-details-section" class="content-section slide">
+                <h2>Driver Details</h2>
+                <div class="details" id="driver-details">
+                    <p>Name: John Doe</p>
+                    <p>License No: ABC123</p>
+                    <p>Phone: 123-456-7890</p>
+                    <p>Email: john.doe@example.com</p>
+                    <p>Address: 123 Main St, City, Country</p>
+                    <p>Vehicle: Truck</p>
+                    <p>Vehicle License Plate: XYZ123</p>
                 </div>
             </section>
-            <!-- Map container -->
-            <div id="map"></div>
-        </main>
+            <section id="geolocation-section" class="content-section slide">
+                <h2>Live Geolocation</h2>
+                <div id="map"></div>
+            </section>
+            <section id="maintenance-alert-section" class="content-section slide">
+                <h2>Maintenance Alert</h2>
+                <div id="maintenance-alert-details" class="maintenance-history">
+                    <h3>Total Kilometers Driven</h3>
+                    <p>Annually: <span id="annual-km"></span></p>
+                    <p>Monthly: <span id="monthly-km"></span></p>
+                    <p>Daily: <span id="daily-km"></span></p>
+                    <div class="chart-container">
+                        <!-- Canvas element for the bar graph -->
+                        <canvas id="maintenance-chart"></canvas>
+                    </div>
+                    <h3>Previous Maintenance Records</h3>
+                    <ul id="previous-maintenance">
+                        <!-- Previous maintenance records will be dynamically inserted here -->
+                    </ul>
+                </div>
+            </section>
+            <section id="oil-level-section" class="content-section slide">
+                <h2>Oil Level</h2>
+                <div class="details" id="oil-level-details">
+                    <p>Current Oil Level: <span id="current-oil-level">70%</span></p>
+                    
+                </div>
+            </section>
+          <section id="tpms-section" class="content-section slide">
+              <h2>Tire Pressure Monitoring System (TPMS)</h2>
+              <div id="tire-pressure-details" class="tire-pressure">
+                  <div id="tire-container" style="display: flex; justify-content: center; align-items: flex-start;">
+                      <div style="display: flex; flex-direction: column;">
+                          <svg class="tire" viewBox="0 0 120 120">
+                              <!-- Tire diagram for Front Left tire -->
+                              <circle cx="60" cy="60" r="50" fill="#fff" stroke="#000" stroke-width="2" />
+                              <text x="60" y="60" text-anchor="middle" alignment-baseline="middle">FL</text>
+                              <text x="60" y="80" text-anchor="middle" alignment-baseline="middle" class="tire-pressure" id="fl-pressure">-- psi</text>
+                          </svg>
+
+                          <svg class="tire" viewBox="0 0 120 120">
+                              <!-- Tire diagram for Rear Left tire -->
+                              <circle cx="60" cy="60" r="50" fill="#fff" stroke="#000" stroke-width="2" />
+                              <text x="60" y="60" text-anchor="middle" alignment-baseline="middle">RL</text>
+                              <text x="60" y="80" text-anchor="middle" alignment-baseline="middle" class="tire-pressure" id="rl-pressure">-- psi</text>
+                          </svg>
+                      </div>
+
+                      <div style="display: flex; flex-direction: column; margin-left: 20px;">
+                          <svg class="tire" viewBox="0 0 120 120">
+                              <!-- Tire diagram for Front Right tire -->
+                              <circle cx="60" cy="60" r="50" fill="#fff" stroke="#000" stroke-width="2" />
+                              <text x="60" y="60" text-anchor="middle" alignment-baseline="middle">FR</text>
+                              <text x="60" y="80" text-anchor="middle" alignment-baseline="middle" class="tire-pressure" id="fr-pressure">-- psi</text>
+                          </svg>
+
+                          <svg class="tire" viewBox="0 0 120 120">
+                              <!-- Tire diagram for Rear Right tire -->
+                              <circle cx="60" cy="60" r="50" fill="#fff" stroke="#000" stroke-width="2" />
+                              <text x="60" y="60" text-anchor="middle" alignment-baseline="middle">RR</text>
+                              <text x="60" y="80" text-anchor="middle" alignment-baseline="middle" class="tire-pressure" id="rr-pressure">-- psi</text>
+                          </svg>
+                      </div>
+                  </div>
+              </div>
+          </section>
+</main>
     </div>
+    <script>
+      document.getElementById('login-form').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent form submission
+          var username = document.getElementById('username').value;
+          var password = document.getElementById('password').value;
+          // Perform simple validation (replace with your actual validation logic)
+        if (username === 'admin' && password === 'password') {
+            // Correct credentials, proceed to dashboard
+            document.querySelector('.login-form').style.display = 'none'; // Hide login form
+            document.querySelectorAll('.dashboard-container').forEach(function(container) {
+                container.style.display = 'flex'; // Show dashboard containers
+            });
+        } else {
+            // Incorrect credentials, display error message
+            document.getElementById('login-error').style.display = 'block';
+        }
+      });
+
+    </script>
+
 
     <script>
-        // Function to initialize the map
         function initMap() {
-            // Set the coordinates for the center of the map (default to New York)
             var center = { lat: 12.969059, lng: 80.189276 };
+            var destination = { lat: 12.977873, lng: 80.222356 }; // Destination coordinates
 
-            // Create a new map instance
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: center,
-                zoom: 12 // Adjust the zoom level as needed
+                zoom: 12 
             });
 
-            // Add a marker to the map (default to New York)
-            var marker = new google.maps.Marker({
+            // Add truck icon (point A)
+            var truckIcon = {
+                url: 'http://maps.google.com/mapfiles/ms/icons/truck.png',
+                scaledSize: new google.maps.Size(48, 48),
+            };
+            var truckMarker = new google.maps.Marker({
                 position: center,
                 map: map,
-                title: "i'm here" // Optional title for the marker
+                title: "Truck Location",
+                icon: truckIcon,
             });
+
+            // Add home garden business icon (point B)
+            var homeGardenBusinessIcon = {
+                url: 'https://maps.gstatic.com/mapfiles/ms2/micons/homegardenbusiness.png',
+                scaledSize: new google.maps.Size(48, 48),
+            };
+            var homeGardenBusinessMarker = new google.maps.Marker({
+                position: destination,
+                map: map,
+                title: "Factory Location",
+                icon: homeGardenBusinessIcon,
+            });
+
+            // Add route with traffic analysis
+            var directionsService = new google.maps.DirectionsService();
+            var directionsRenderer = new google.maps.DirectionsRenderer({
+                map: map,
+            });
+
+            var request = {
+                origin: center,
+                destination: destination,
+                travelMode: 'DRIVING',
+                drivingOptions: {
+                    departureTime: new Date(),
+                    trafficModel: 'pessimistic' // You can change this to optimistic or bestguess
+                }
+            };
+
+            directionsService.route(request, function(response, status) {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+
+            // Show traffic layer
+            var trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
 
             // Function to handle displaying map when "Live Geolocation" link is clicked
             document.getElementById('live-geolocation-link').addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
-                document.getElementById('map').style.display = 'block'; // Display the map
+                event.preventDefault();
+                showSlide('geolocation-section');
+                // Initialize the map when the geolocation section becomes active
+                initMap();
             });
+
+            // Function to handle displaying driver details when "Driver Details" link is clicked
+            document.getElementById('driver-details-link').addEventListener('click', function(event) {
+                event.preventDefault();
+                showSlide('driver-details-section');
+            });
+
+            // Function to handle displaying maintenance alert details when "Maintenance Alert" link is clicked
+            document.getElementById('maintenance-alert-link').addEventListener('click', function(event) {
+                event.preventDefault();
+                showSlide('maintenance-alert-section');
+                updateMaintenanceAlert(); // Update maintenance alert details
+            });
+
+            // Function to handle displaying oil level details when "Oil Level" link is clicked
+            document.getElementById('oil-level-link').addEventListener('click', function(event) {
+                event.preventDefault();
+                showSlide('oil-level-section');
+                updateOilLevel(); // Update oil level details
+            });
+
+            function showSlide(id) {
+                var slides = document.querySelectorAll('.slide');
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].classList.remove('active');
+                }
+                document.getElementById(id).classList.add('active');
+            }
+          document.getElementById('tpms-link').addEventListener('click', function(event) {
+              event.preventDefault();
+              showSlide('tpms-section');
+              updateTirePressure(); // Update tire pressure details
+       
+          });
+
+          function updateTirePressure() {
+              // Fetch and update tire pressure information dynamically (example)
+              var tirePressureData = [
+                  { tire: 'FL', pressure: 35 },
+                  { tire: 'FR', pressure: 36 },
+                  { tire: 'RL', pressure: 34 },
+                  { tire: 'RR', pressure: 35 }
+              ];
+
+              tirePressureData.forEach(function(data) {
+                  var tirePressureElement = document.getElementById(data.tire.toLowerCase() + '-pressure');
+                  if (tirePressureElement) {
+                      tirePressureElement.textContent = data.pressure + ' psi';
+                  }
+              });
+          }
+
+
+            // Function to update maintenance alert section
+            function updateMaintenanceAlert() {
+                // Calculate total kilometers driven annually, monthly, and daily (example values)
+                var annualKm = 100000;
+                var monthlyKm = 45286;
+                var dailyKm = 15681;
+
+                // Update the total kilometers spans
+                document.getElementById('annual-km').textContent = annualKm + " KM";
+                document.getElementById('monthly-km').textContent = monthlyKm + " KM";
+                document.getElementById('daily-km').textContent = dailyKm + " KM";
+
+                // Fetch previous maintenance records (example records)
+                var previousMaintenance = [
+                    { date: "2023-12-01", description: "Oil Change" },
+                    { date: "2023-10-15", description: "Brake Pad Replacement" },
+                    { date: "2023-08-20", description: "Tire Rotation" },
+                    // Add more records for the past years as needed
+                    { date: "2022-12-01", description: "Oil Change" },
+                    { date: "2022-10-15", description: "Brake Pad Replacement" },
+                    { date: "2022-08-20", description: "Tire Rotation" },
+                    { date: "2021-12-01", description: "Oil Change" },
+                    { date: "2021-10-15", description: "Brake Pad Replacement" },
+                    { date: "2021-08-20", description: "Tire Rotation" }
+                ];
+
+                // Update the previous maintenance records list
+                var previousMaintenanceList = document.getElementById('previous-maintenance');
+                previousMaintenanceList.innerHTML = ''; // Clear previous list items
+                previousMaintenance.forEach(function(maintenance) {
+                    var listItem = document.createElement('li');
+                    listItem.textContent = maintenance.date + ": " + maintenance.description;
+                    previousMaintenanceList.appendChild(listItem);
+                });
+
+                // Prepare data for the bar graph
+                var labels = ['Annual', 'Monthly', 'Daily'];
+                var data = [annualKm, monthlyKm, dailyKm];
+
+                // Create the bar graph using Chart.js
+                var ctx = document.getElementById('maintenance-chart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Kilometers Driven',
+                            data: data,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+            // Function to update oil level details
+            function updateOilLevel() {
+                // Fetch and update oil level information dynamically (example)
+                var currentOilLevel = 70; // Assuming oil level is 70%
+                document.getElementById('current-oil-level').textContent = currentOilLevel + "%";
+            }
         }
     </script>
 </body>

@@ -66,6 +66,7 @@
 
         li {
             margin-bottom: 10px;
+          
         }
 
         a {
@@ -94,6 +95,7 @@
         </div>
     </header>
     <div class="dashboard-container">
+
         <aside class="sidebar">
             <h2>Dashboard</h2>
             <ul>
@@ -105,6 +107,9 @@
             </ul>
         </aside>
         <main class="main-content">
+
+
+
             <section id="maintenance-alert" class="content-section">
                 <h2>Maintenance Alert</h2>
                 <p>This is a sample maintenance alert. It could contain information about upcoming maintenance schedules, alerts for potential issues, or reminders for regular inspections.</p>
