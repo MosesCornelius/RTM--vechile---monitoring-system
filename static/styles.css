@@ -5,78 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RTMS</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6;
+    color: #333;
+}
 
-        header {
-            background-color: #0c0c0c;
-            color: #ffffff;
-            padding: 20px;
-            position: relative;
-        }
+header {
+    background-color: #000;
+    color: #ffffff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .title {
-            margin: 0;
-        }
+.login-form {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-        .notification-profile {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
+.login-form h2 {
+    margin-top: 0;
+    text-align: center;
+}
 
-        .notification,
-        .profile {
-            margin-left: 10px;
-        }
+.login-form div {
+    margin-bottom: 10px;
+}
 
-        .dashboard-container {
-            display: flex;
-            margin-top: 20px;
-        }
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
 
-        .sidebar {
-            width: 200px;
-            background-color: #f4f4f4;
-        }
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 
-        .main-content {
-            flex: 1;
-            padding: 20px;
-        }
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        section {
-            margin-bottom: 40px;
-        }
+.login-form button:hover {
+    background-color: #0056b3;
+}
 
-        h2 {
-            color: #333;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-        }
+#login-error {
+    margin-top: 10px;
+    color: red;
+    text-align: center;
+}
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+.dashboard-container {
+    display: none;
+    margin-top: 20px;
+}
 
-        li {
-            margin-bottom: 10px;
-          
-        }
+.sidebar {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
 
-        a {
-            text-decoration: none;
-            color: #333;
-        }
+.sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-        a:hover {
-            text-decoration: underline;
-        }
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
 <body>

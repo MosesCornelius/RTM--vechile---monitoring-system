@@ -53,19 +53,20 @@
 
     .login-form {
         width: 300px;
-        margin: 0 auto;
+        margin: 0 auto; /* Add this line to center the login form horizontally */
         padding: 20px;
-        border: 1px solid #ccc;
+        border: 10px solid #ccc;
         border-radius: 5px;
-        height: 100vh;
+        height: 40vh;
     }
 
+
     .login-form h2 {
-        margin-top: 0;
+        margin-top: 10;
     }
 
     .login-form div {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 
     .login-form label {
@@ -75,7 +76,7 @@
 
     .login-form input[type="text"],
     .login-form input[type="password"] {
-        width: 100%;
+        width: 90%;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 3px;
@@ -99,16 +100,9 @@
         margin-top: 10px;
     }
 
-    
-
-    .top-left-icons {
-        float: left;
-        padding: 10px;
-    }
-
+    .top-left-icons,
     .top-right-icons {
-        float: right;
-        padding: 10px;
+        display: none; /* Hide the icons initially */
     }
 
     .profile-icon,
@@ -123,9 +117,10 @@
 
     .dashboard-container {
         display: none; /* Change display property to none initially */
-        margin-top: 20px;
-        justify-content: flex-start; /* Change justify-content property to flex-start */
-        align-items: flex-start;
+        margin-top: 100px;
+        margin-left: 10px;
+        justify-content: left; /* Change justify-content property to flex-start */
+        align-items: left;
         color: #000; /* Set text color to black */
       
      
@@ -143,9 +138,9 @@
         display: flex;
         flex-wrap: wrap;3
         justify-content: space-between;
-        color: #ffff;; /* Set text color to black */
+        color: #000; /* Set text color to black */
         margin-left: 20px; /* Adjust margin to the left side */
-        margin-top: 0; /* Remove margin from the top side */
+        margin-top: 10px; /* Remove margin from the top side */
     }
 
 
@@ -155,31 +150,31 @@
           background-color: #000;
           padding: 20px;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          border-radius: 5px;
+          border-radius: 10px;
       }
 
       h2 {
           color: #000; /* Set text color to black */
           border-bottom: 2px solid #000; /* Set border color to black */
           padding-bottom: 10px;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           white-space: nowrap; /* Prevent line break */
           overflow: hidden; /* Hide overflowing text */
           text-overflow: ellipsis; /* Display ellipsis (...) for overflowing text */
       }
 
       .dashboard-heading {
-          margin-bottom: 0.5em; /* Add some margin below the dashboard heading */
+          margin-bottom: 100em; /* Add some margin below the dashboard heading */
       }
 
       ul {
           list-style: none;
           padding: 0;
-          margin: 0;
+          margin: 10px;
       }
 
       li {
-          margin-bottom: 10px;
+          margin-bottom: 20px;
       }
 
       b.button {
@@ -295,7 +290,7 @@
 
     #fr-pressure {
         transform: translate(25px, 0);
-    }
+    } 
 
     #rl-pressure {
         transform: translate(-25px, 0);
@@ -331,25 +326,23 @@
         </form>
         <p id="login-error" style="color: red; display: none;">Invalid username or password.</p>
     </div>
-    <header>
-        <div class="top-left-icons">
-            <h1>RTMS</h1>
-        </div>
-        <div class="top-right-icons">
-            <img src="profile_icon.png" alt="Profile" class="profile-icon">
-            <img src="notification_icon.png" alt="Notification" class="notification-icon">
-            <img src="support_icon.png" alt="Support" class="support-icon">
-        </div>
-    </header>
-
-
+    
     <!-- Dashboard content (initially hidden) -->
-    <div class="dashboard-container" style="display: none;">
-        <!-- Dashboard content -->
+            <div class="top-left-icons">
+                <h1>RTMS</h1>
+            </div>
+            <div class="top-right-icons">
+                <img src="profile_icon.png" alt="Profile" class="profile-icon">
+                <img src="notification_icon.png" alt="Notification" class="notification-icon">
+                <img src="support_icon.png" alt="Support" class="support-icon">
+            </div>
+        
+     
     </div>
 
   <div class="dashboard-container">
         <aside class="sidebar">
+          
             <h2>Dashboard</h2>
             <ul>
                 <li><button id="driver-details-link">Driver Details</button></li>
@@ -446,18 +439,36 @@
           var username = document.getElementById('username').value;
           var password = document.getElementById('password').value;
           // Perform simple validation (replace with your actual validation logic)
-        if (username === 'admin' && password === 'password') {
-            // Correct credentials, proceed to dashboard
-            document.querySelector('.login-form').style.display = 'none'; // Hide login form
-            document.querySelectorAll('.dashboard-container').forEach(function(container) {
-                container.style.display = 'flex'; // Show dashboard containers
-            });
-        } else {
-            // Incorrect credentials, display error message
-            document.getElementById('login-error').style.display = 'block';
-        }
+          if (username === 'admin' && password === 'password') {
+              // Correct credentials, proceed to dashboard
+              document.querySelector('.login-form').style.display = 'none'; // Hide login form
+              document.querySelectorAll('.dashboard-container').forEach(function(container) {
+                  container.style.display = 'flex'; // Show dashboard containers
+              });
+              // Show the RTMS header and the profile, notification, and support icons
+              document.querySelectorAll('.top-left-icons, .top-right-icons').forEach(function(icon) {
+                  icon.style.display = 'block';
+              });
+          } else {
+              // Incorrect credentials, display error message
+              document.getElementById('login-error').style.display = 'block';
+          }
       });
 
+    </script>
+    
+    <script>
+        // Add event listener for touchstart event on the document
+        document.addEventListener('touchstart', function(event) {
+            var dashboardContainer = document.querySelector('.dashboard-container');
+            // Check if the touch event occurred outside the dashboard container
+            if (!dashboardContainer.contains(event.target)) {
+                // Hide the dashboard container if it's currently visible
+                if (dashboardContainer.style.display === 'flex') {
+                    dashboardContainer.style.display = 'none';
+                }
+            }
+        });
     </script>
 
 
