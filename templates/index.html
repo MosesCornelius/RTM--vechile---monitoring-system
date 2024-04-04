@@ -3,44 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RTMS - Login</title>
-
-    <!-- Include Google Maps API with your API key -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEGJ7YEdFyvwTgIfvLwVmaJXBSUbsomS8&callback=initMap" defer></script>
-    <!-- Include Chart.js library -->
+    <title>RTMS - Login</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-      body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #000;
-          color: #ffffff; /* Set text color to black */
-          height: 100vh;
-      }
-    header {
-        background-color: #000;
-        color:#ffffff;
-        padding: 10px;
-        text-align:right-top;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #ffffff;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
 
-    .header-icons {
-        text-align: right;
-        display: flex;
-        align-items: center;
-      
-        
-    }
-    .top-left-icons {
-        float: left;
-        padding: 10px;
-    }
-
-    .top-right-icons {
-        float: right;
-        padding: 10px;
-    }
+        /* Hide the RTMS header and other elements by default */
+        .top-left-icons,
+        .top-right-icons,
+        .dashboard-container {
+            display: none;
+        }
 
     .profile-icon,
     .notification-icon,
@@ -50,19 +31,21 @@
         margin-left: 10px;
         cursor: pointer;
     }
-
+      
     .login-form {
-        width: 300px;
-        margin: 0 auto; /* Add this line to center the login form horizontally */
-        padding: 20px;
-        border: 10px solid #ccc;
-        border-radius: 5px;
-        height: 40vh;
+      width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 10px solid #ccc;
+      border-radius: 5px;
+      background-color: #333;
     }
 
 
     .login-form h2 {
-        margin-top: 10;
+      margin-top: 0;
+      text-align: center;
+      color: #fff;
     }
 
     .login-form div {
@@ -70,26 +53,29 @@
     }
 
     .login-form label {
-        display: block;
-        margin-bottom: 5px;
+      display: block;
+      margin-bottom: 5px;
+      color: #fff;
     }
 
     .login-form input[type="text"],
     .login-form input[type="password"] {
-        width: 90%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
+      width: calc(100% - 16px);
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
     }
 
     .login-form button {
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
     }
 
     .login-form button:hover {
@@ -97,12 +83,32 @@
     }
 
     #login-error {
-        margin-top: 10px;
+      margin-top: 10px;
+      color: red;
+      display: none;
+      text-align: center;
     }
 
-    .top-left-icons,
+      .top-left-icons {
+          padding: 10px;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          display: none; /* Add this line to display the RTMS header */
+      }
+
     .top-right-icons {
-        display: none; /* Hide the icons initially */
+        padding: 10px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .dashboard-container {
+        position: relative;
+        margin-top: 150px; /* Adjust the margin as needed */
+      
+        /* Add other styling for the dashboard container */
     }
 
     .profile-icon,
@@ -110,47 +116,55 @@
     .support-icon {
         width: 24px; /* Adjust icon size as needed */
         height: 24px;
-        margin-left: 10px;
+        margin-left: 10px;.top-left-icons {
+          padding: 10px;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+      }
+
+      .top-right-icons {
+          padding: 10px;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+      }
+
+      
         cursor: pointer;
     }
 
-
-    .dashboard-container {
-        display: none; /* Change display property to none initially */
-        margin-top: 100px;
-        margin-left: 10px;
-        justify-content: left; /* Change justify-content property to flex-start */
-        align-items: left;
-        color: #000; /* Set text color to black */
-      
-     
+    .sidebar {
+        width: 200px;
+        background-color: #333;
+        padding: 20px;
     }
-
-
       .slide {
           display: none;
           margin: 0 auto; /* Add this line to center the slide horizontally */
           max-width: 800px; /* Adjust the maximum width of the slide as needed */
       }
     .main-content {
-        flex: 1;
-        padding: 0 20px; /* Adjust padding to provide spacing on the sides */
-        display: flex;
-        flex-wrap: wrap;3
-        justify-content: space-between;
-        color: #000; /* Set text color to black */
-        margin-left: 20px; /* Adjust margin to the left side */
-        margin-top: 10px; /* Remove margin from the top side */
-    }
+      flex: 1;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      color: #ffffff;
+    
+      .active {
+          display: block; /* Show active section */
+      }
 
 
       section {
-          width: calc(100% - 40px); /* Set the width to take up the entire width of the container minus the padding */
-          margin: 0 20px 40px; /* Adjust margin to provide spacing between sections */
-          background-color: #000;
-          padding: 20px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
+        display: none; /* Initially hide all sections */
+        width: calc(50% - 30px);
+        margin-bottom: 40px;
+        background-color: #222;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
       }
 
       h2 {
@@ -164,7 +178,7 @@
       }
 
       .dashboard-heading {
-          margin-bottom: 100em; /* Add some margin below the dashboard heading */
+          margin-bottom: 10em; /* Add some margin below the dashboard heading */
       }
 
       ul {
@@ -259,8 +273,8 @@
 
       .maintenance-history .chart-container {
           position: absolute;
-          top: 10px;
-          right: 10px;
+          top: auto;
+          right: 100px;
           max-width: 300px; /* Set the maximum width of the chart container */
       }
 
@@ -310,7 +324,7 @@
 
 </head>
 <body>
-  <header>
+  <head>
     <div class="login-form">
         <h2>Login</h2>
         <form id="login-form">
@@ -332,9 +346,9 @@
                 <h1>RTMS</h1>
             </div>
             <div class="top-right-icons">
-                <img src="profile_icon.png" alt="Profile" class="profile-icon">
-                <img src="notification_icon.png" alt="Notification" class="notification-icon">
-                <img src="support_icon.png" alt="Support" class="support-icon">
+              <img src="profile_icon.png" alt="Profile" class="profile-icon">
+              <img src="notification_icon.png" alt="Notification" class="notification-icon">
+              <img src="support_icon.png" alt="Support" class="support-icon">
             </div>
         
      
@@ -435,25 +449,25 @@
     </div>
     <script>
       document.getElementById('login-form').addEventListener('submit', function(event) {
-          event.preventDefault(); // Prevent form submission
-          var username = document.getElementById('username').value;
-          var password = document.getElementById('password').value;
-          // Perform simple validation (replace with your actual validation logic)
-          if (username === 'admin' && password === 'password') {
-              // Correct credentials, proceed to dashboard
-              document.querySelector('.login-form').style.display = 'none'; // Hide login form
-              document.querySelectorAll('.dashboard-container').forEach(function(container) {
-                  container.style.display = 'flex'; // Show dashboard containers
-              });
-              // Show the RTMS header and the profile, notification, and support icons
-              document.querySelectorAll('.top-left-icons, .top-right-icons').forEach(function(icon) {
-                  icon.style.display = 'block';
-              });
-          } else {
-              // Incorrect credentials, display error message
-              document.getElementById('login-error').style.display = 'block';
-          }
-      });
+    event.preventDefault(); // Prevent form submission
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    // Perform simple validation (replace with your actual validation logic)
+    if (username === 'admin' && password === 'password') {
+        // Correct credentials, proceed to dashboard
+        document.querySelector('.login-form').style.display = 'none'; // Hide login form
+        // Show the RTMS header and the profile, notification, and support icons
+        document.querySelectorAll('.top-left-icons, .top-right-icons').forEach(function(icon) {
+            icon.style.display = 'block';
+        });
+        // Show the dashboard container
+        document.querySelector('.dashboard-container').style.display = 'block';
+    } else {
+        // Incorrect credentials, display error message
+        document.getElementById('login-error').style.display = 'block';
+    }
+});
+
 
     </script>
     
@@ -470,7 +484,7 @@
             }
         });
     </script>
-
+    
 
     <script>
         function initMap() {
