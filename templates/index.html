@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RTMS - Login</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9PRoRCIxoH17fhBpa9vpAglANSF1kMwk&callback=initMap" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
@@ -31,7 +31,7 @@
         margin-left: 10px;
         cursor: pointer;
     }
-      
+
     .login-form {
       width: 300px;
       margin: 50px auto;
@@ -91,6 +91,7 @@
 
       .top-left-icons {
           padding: 10px;
+          font-size: 25px;
           position: absolute;
           top: 10px;
           left: 10px;
@@ -107,7 +108,7 @@
     .dashboard-container {
         position: relative;
         margin-top: 150px; /* Adjust the margin as needed */
-      
+
         /* Add other styling for the dashboard container */
     }
 
@@ -130,28 +131,31 @@
           right: 10px;
       }
 
-      
+
         cursor: pointer;
     }
 
     .sidebar {
         width: 200px;
+        margin-top: 150px;
         background-color: #333;
         padding: 20px;
     }
-      .slide {
-          display: none;
-          margin: 0 auto; /* Add this line to center the slide horizontally */
-          max-width: 800px; /* Adjust the maximum width of the slide as needed */
-      }
+     .slide {
+    display: none;
+    margin: 20px auto 100px; /* Center the slide horizontally and add space below the header */
+    max-width: 700px; /* Adjust the maximum width of the slide as needed */
+}
     .main-content {
       flex: 1;
+      margin-top: -250px ;
+      margin-right: 100px;
       padding: 0 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       color: #ffffff;
-    
+
       .active {
           display: block; /* Show active section */
       }
@@ -188,7 +192,7 @@
       }
 
       li {
-          margin-bottom: 20px;
+          margin-bottom: auto;
       }
 
       b.button {
@@ -234,10 +238,14 @@
 
 
       #map {
+          align-content: center; 
           position: fit;
           height: 400px;
           width: 100%;
           border-radius: 5px;
+           
+        
+        
       }
 
       .slide {
@@ -263,7 +271,7 @@
       /* Styling for the maintenance chart */
       #maintenance-chart {
           width: 100%;
-          height: auto;
+          height: 100PX;
           max-width: 300px; /* Set the maximum width of the chart */
       }
 
@@ -273,19 +281,13 @@
 
       .maintenance-history .chart-container {
           position: absolute;
-          top: auto;
+          top: -15px;
           right: 100px;
-          max-width: 300px; /* Set the maximum width of the chart container */
+          max-width: 1000px; /* Set the maximum width of the chart container */
       }
 
       /* Styling for the oil droplet */
-      .oil-droplet {
-          width: 100px;
-          height: auto;
-          position: absolute;
-          top: 10px;
-          right: 10px;
-      }
+      
 
       /* Styling for the tire pressure */
     .tire-pressure {
@@ -293,8 +295,8 @@
     }
 
     .tire {
-        width: 120px;
-        height: 120px;
+        width: 200px;
+        height: 200px;
     }
 
     /* Adjust the position of the tire pressure text for each tire */
@@ -340,7 +342,7 @@
         </form>
         <p id="login-error" style="color: red; display: none;">Invalid username or password.</p>
     </div>
-    
+
     <!-- Dashboard content (initially hidden) -->
             <div class="top-left-icons">
                 <h1>RTMS</h1>
@@ -350,13 +352,13 @@
               <img src="notification_icon.png" alt="Notification" class="notification-icon">
               <img src="support_icon.png" alt="Support" class="support-icon">
             </div>
-        
-     
+
+
     </div>
 
   <div class="dashboard-container">
         <aside class="sidebar">
-          
+
             <h2>Dashboard</h2>
             <ul>
                 <li><button id="driver-details-link">Driver Details</button></li>
@@ -391,8 +393,7 @@
                     <p>Monthly: <span id="monthly-km"></span></p>
                     <p>Daily: <span id="daily-km"></span></p>
                     <div class="chart-container">
-                        <!-- Canvas element for the bar graph -->
-                        <canvas id="maintenance-chart"></canvas>
+                      <canvas id="maintenance-chart" style="height: 300px;"></canvas>
                     </div>
                     <h3>Previous Maintenance Records</h3>
                     <ul id="previous-maintenance">
@@ -402,9 +403,10 @@
             </section>
             <section id="oil-level-section" class="content-section slide">
                 <h2>Oil Level</h2>
+                
                 <div class="details" id="oil-level-details">
                     <p>Current Oil Level: <span id="current-oil-level">70%</span></p>
-                    
+
                 </div>
             </section>
           <section id="tpms-section" class="content-section slide">
@@ -470,7 +472,7 @@
 
 
     </script>
-    
+
     <script>
         // Add event listener for touchstart event on the document
         document.addEventListener('touchstart', function(event) {
@@ -484,7 +486,7 @@
             }
         });
     </script>
-    
+
 
     <script>
         function initMap() {
@@ -587,7 +589,7 @@
               event.preventDefault();
               showSlide('tpms-section');
               updateTirePressure(); // Update tire pressure details
-       
+
           });
 
           function updateTirePressure() {
